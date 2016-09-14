@@ -1,0 +1,394 @@
+name: "Vtouch_siamese_train_test"
+input: "data"
+input_shape {
+  dim: 1
+  dim: 1
+  dim: 100
+  dim: 100
+}
+
+#############################################
+# 	data - 2 conv relu pool net - pool1		#
+#############################################
+
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  convolution_param {
+    num_output: 32
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "conv1_w"
+  #param: "conv1_b"
+}
+
+layer {
+  name: "relu1"
+  type:"ReLU"
+  bottom: "conv1"
+  top: "conv1"
+}
+
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "conv1"
+  top: "conv2"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  convolution_param {
+    num_output: 32
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "conv2_w"
+  #param: "conv2_b"
+}
+
+layer {
+  name: "relu2"
+  type:"ReLU"
+  bottom: "conv2"
+  top: "conv2"
+}
+
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv2"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+
+#############################################
+# 	pool1 - 2 conv relu pool net - pool2	#
+#############################################
+
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv3"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "conv3_w"
+  #param: "conv3_b"
+}
+
+layer {
+  name: "relu3"
+  type:"ReLU"
+  bottom: "conv3"
+  top: "conv3"
+}
+
+layer {
+  name: "conv4"
+  type: "Convolution"
+  bottom: "conv3"
+  top: "conv4"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "conv4_w"
+  #param: "conv4_b"
+}
+
+layer {
+  name: "relu4"
+  type:"ReLU"
+  bottom: "conv4"
+  top: "conv4"
+}
+
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv4"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+
+#############################################
+# 	pool2 - 2 conv relu pool net - pool3	#
+#############################################
+
+
+layer {
+  name: "conv5"
+  type: "Convolution"
+  bottom: "pool2"
+  top: "conv5"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  convolution_param {
+    num_output: 96
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "conv5_w"
+  #param: "conv5_b"
+}
+
+layer {
+  name: "relu5"
+  type:"ReLU"
+  bottom: "conv5"
+  top: "conv5"
+}
+
+layer {
+  name: "conv6"
+  type: "Convolution"
+  bottom: "conv5"
+  top: "conv6"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  convolution_param {
+    num_output: 96
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "conv6_w"
+  #param: "conv6_b"
+}
+
+layer {
+  name: "relu6"
+  type:"ReLU"
+  bottom: "conv6"
+  top: "conv6"
+}
+
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "conv6"
+  top: "pool3"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+
+#############################################
+# 		pool3 - 1 conv relu - conv7			#
+#############################################
+
+layer {
+  name: "conv7"
+  type: "Convolution"
+  bottom: "pool3"
+  top: "conv7"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  convolution_param {
+    num_output: 128
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "conv7_w"
+  #param: "conv7_b"
+}
+
+layer {
+  name: "relu7"
+  type:"ReLU"
+  bottom: "conv7"
+  top: "conv7"
+}
+
+layer {
+  name: "conv8"
+  type: "Convolution"
+  bottom: "conv7"
+  top: "conv8"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  convolution_param {
+    num_output: 128
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "conv8_w"
+  #param: "conv8_b"
+}
+
+layer {
+  name: "relu8"
+  type:"ReLU"
+  bottom: "conv8"
+  top: "conv8"
+}
+
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "conv8"
+  top: "pool4"
+  pooling_param {
+    pool: AVE
+    kernel_size: 5
+    stride: 1
+  }
+}
+#############################################
+# 		conv7 - ip1 relu ip2 - conv7		#
+#############################################
+
+layer {
+  name: "ip1"
+  type: "InnerProduct"
+  bottom: "pool4"
+  top: "ip1"
+  #  blobs_lr: 1
+  #  blobs_lr: 2
+  inner_product_param {
+    num_output: 200
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "ip1_w"
+  #param: "ip1_b"
+}
+layer {
+  name: "relu8"
+  type:"ReLU"
+  bottom: "ip1"
+  top: "ip1"
+}
+
+layer {
+  name: "drop1"
+  type: "Dropout"
+  bottom: "ip1"
+  top: "ip1"
+  dropout_param{
+    dropout_ratio: 0.4
+  }
+}
+
+#layer {
+#  name: "ip2"
+#  type: "InnerProduct"
+#  bottom: "ip1"
+#  top: "ip2"
+  #  #  blobs_lr: 1
+  #  #  blobs_lr: 2
+#  inner_product_param {
+#    num_output: 200
+#    weight_filler {
+#      type: "xavier"
+#    }
+#    bias_filler {
+#      type: "constant"
+#    }
+#  }
+#  #param: "ip2_w"
+#  #param: "ip2_b"
+#}
+
+#layer {
+#  name: "drop2"
+#  type: "Dropout"
+#  bottom: "ip2"
+#  top: "ip2"
+#  dropout_param{
+#    dropout_ratio: 0.4
+#  }
+#}
+
+layer {
+  name: "feat"
+  type: "InnerProduct"
+  bottom: "ip1"
+  top: "feat"
+  #  #  blobs_lr: 1
+  #  #  blobs_lr: 2
+  inner_product_param {
+    num_output: 13
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+  #param: "feat_w"
+  #param: "feat_b"
+}
