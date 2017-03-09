@@ -5,6 +5,11 @@ If you want to use debug mode project, you have to set up debug 3rdparty library
 
 ## Usage step:
 
+0. Requirements
+ 1) third party libraries: https://pan.baidu.com/s/1mhZgDeS . Please extract the archive into ./Caffe_windows/thirdparty/
+   . https://drive.google.com/drive/u/1/my-drive : my google drive;
+ 2) execute ./Caffe_windows/src/caffe/proto/extract_proto.bat
+
 1. Run ./build_cpu_only/MainBuilder.sln
 
 2. Compile mode : Release and x64
